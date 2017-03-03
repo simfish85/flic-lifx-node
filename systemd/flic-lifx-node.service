@@ -1,0 +1,14 @@
+[Unit]
+Description=flic-lifx-node client Service
+After=flicd.service
+Requires=flicd.service
+
+[Service]
+ExecStart=/usr/bin/node /home/pi/flic-lifx-node/clientlib/nodejs/lifxclient.js
+Restart=always
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=flic-lifx-node
+
+[Install]
+WantedBy=multi-user.target

@@ -185,26 +185,45 @@ function listenToButton(bdAddr) {
 										}
                     break;
                   case '80:e4:da:70:d0:39': // Dominic's Room Flic
-                  
-                    console.log("Dominics room " + clickType + " " + (wasQueued ? "wasQueued" : "notQueued") + " " + timeDiff + " seconds ago");
-										if (clickType == 'ButtonSingleClick') {
-											var light = lifxClient.light('Dominics Room');
-											if (light) {
-												light.getPower(function(error,data) {
-													if (data == 0) {
-														light.on(1000);
-													}
-													else {
-														light.off(1000);														
-													}
-												});
-											}
-											else {
-												console.log("Dominics Room could not be found.");
-											}
-										}					
-										break;
-                
+					console.log("Dominics room " + clickType + " " + (wasQueued ? "wasQueued" : "notQueued") + " " + timeDiff + " seconds ago");
+					if (clickType == 'ButtonSingleClick') {
+						var light = lifxClient.light('Dominics Room');
+						if (light) {
+							light.getPower(function(error,data) {
+								if (data == 0) {
+									light.on(1000);
+								}
+								else {
+									light.off(1000);														
+								}
+							});
+						}
+						else {
+							console.log("Dominics Room could not be found.");
+						}
+					}
+					if (clickType == 'ButtonHold') {
+						var light = lifxClient.light('Dominics Room');
+						if (light) {
+							light.getState(function(error,data) {
+								if (data) {
+									if (data.color.kelvin == 3000) {
+										light.color(201,21, 70, 3500, 1000);
+									}
+									else {
+										light.color(0,0, 70, 3000, 1000);
+									}
+								}
+								else {
+									console.log("Data not available in playroom");
+								}
+							});
+						}
+						else {
+							console.log("Dominics Room could not be found.");
+						}												var light = lifxClient.light('Dominics Room');
+					}
+					break;                
                   default:
                     console.log("Unknown " + clickType + " " + (wasQueued ? "wasQueued" : "notQueued") + " " + timeDiff + " seconds ago");
 

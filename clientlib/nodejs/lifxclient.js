@@ -208,7 +208,7 @@ function listenToButton(bdAddr) {
 							light.getState(function(error,data) {
 								if (data) {
 									if (data.color.kelvin == 3000) {
-										light.color(201,21, 70, 3500, 1000);
+										light.color(228,100, 25, 3500, 1000);
 									}
 									else {
 										light.color(0,0, 70, 3000, 1000);
